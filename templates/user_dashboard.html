@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .logout-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ee5a52;
+        }
+
+        .dashboard-title {
+            font-size: 32px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        /* Add Button */
+        .add-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .add-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #45a049;
+        }
+
+        /* Stats Containers */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s;
+            border-left: 4px solid #3498db;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-box:nth-child(1) {
+            border-left-color: #3498db;
+        }
+
+        .stat-box:nth-child(2) {
+            border-left-color: #e74c3c;
+        }
+
+        .stat-box:nth-child(3) {
+            border-left-color: #f39c12;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        /* Menu Items Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid #e8e8e8;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .item-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .item-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 12px;
+        }
+
+        .item-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn, .delete-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .order-btn {
+            padding: 8px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .order-btn:hover {
+            background-color: #218838;
+        }
+
+        .edit-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #2980b9;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+           
+            <h1 class="dashboard-title">🛖 Curnchy Kitchen</h1>
+             <button class="logout-btn"><a style="text-decoration: none;color: whitesmoke;" href="/api/logout">Logout</a></button>
+        </div>
+
+        <!-- Add Button -->
+         
+        <div class="add-section">
+            <p>Crunchy Kitchen is a modern, fast-casual restaurant known for its bold flavors, fresh ingredients, and signature crunchy-style dishes. We specialize in crispy fried chicken, flavorful wings, loaded meals, and delicious sides prepared with a perfect balance of taste and texture. Our menu is crafted to offer satisfying, comfort-rich food that appeals to all age groups. With a clean, welcoming atmosphere and a commitment to quality, Crunchy Kitchen aims to give every customer a tasty, enjoyable, and memorable dining experience.</p>
+            <!-- <button class="add-btn">+ Add New Dish</button> -->
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-label">Curnchy AI </div>
+                <div class="stat-value">🧟‍♂️</div>
+                <button class="add-btn"><a style="text-decoration: none;color: white;" href="/ai/suggest">Curnchy AI</a></button>
+
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Average Price</div>
+                <div class="stat-value">$18</div>
+                
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">View All Orders </div>
+                <div class="stat-value">🍔</div>
+                <button class="add-btn"><a style="text-decoration: none;color: white;" href="/view/user/orders">View All</a></button>
+
+            </div>
+        </div>
+
+      
+        <div class="menu-grid">
+
+                {% for dish in dishes %}
+
+                <div class="menu-card">
+
+                    <!-- Dynamic Image Handling -->
+                    {% if dish.item_image.startswith('http') %}
+                        <img src="{{ dish.item_image }}" alt="{{ dish.item_name }}" class="card-image">
+                    {% else %}
+                        <img src="/static/{{ dish.item_image }}" alt="{{ dish.item_name }}" class="card-image">
+                    {% endif %}
+
+                    <div class="card-content">
+
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3 class="item-name">{{ dish.item_name }}</h3>
+                            <button class="order-btn"><a style="text-decoration: none;color: whitesmoke;" href="/add/order/{{dish.id}}">Order</a></button>
+                        </div>
+
+                        <div class="item-price">₹{{ dish.item_price }}</div>
+
+                        <p class="item-description">{{ dish.description }}</p>
+
+
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            
+    
+    </div>
+</body>
+</html>

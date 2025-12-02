@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .logout-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ee5a52;
+        }
+
+        .dashboard-title {
+            font-size: 32px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        /* View Orders Section */
+        .view-orders-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-orders-content h2 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .view-orders-content p {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .view-btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .view-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Orders Grid */
+        .orders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid #e8e8e8;
+        }
+
+        .order-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .order-info {
+            margin-bottom: 15px;
+        }
+
+        .order-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .order-value {
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #27ae60;
+            margin: 15px 0;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .accept-btn, .served-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .accept-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .accept-btn:hover {
+            background: #45a049;
+        }
+
+        .served-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        .served-btn:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="dashboard-title">🛖 Curnchy Kitchen</h1>
+            <!-- <button class="logout-btn"><a style="text-decoration: none;color: whitesmoke;" href="/api/logout">Logout</a></button> -->
+        </div>
+        
+
+        <!-- View Orders Section -->
+        <div class="view-orders-section">
+            <div class="view-orders-content">
+                <h2>View Orders</h2>
+                <p>Manage all incoming orders and track their status</p>
+            </div>
+            <button class="view-btn"><a style="text-decoration: none;" href="/user/dashboard">Dashboard</a></button>
+        </div>
+
+        <!-- Orders List -->
+        <div class="orders-grid">
+            <!-- Order Card 1 -->
+             {% for order in orders %}
+            <div class="order-card">
+                <div class="card-content">
+                    <!-- <div class="order-info">
+                        <div class="order-label">User Name</div>
+                        <div class="order-value">11111</div>
+                    </div> -->
+                    <div class="order-info">
+                        <div class="order-label">Order ID</div>
+                        <div class="order-value">{{order.id}}</div>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-label">Item Name</div>
+                        <div class="order-value">{{order.item.item_name}}</div>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-label">Item Quantity</div>
+                        <div class="order-value">{{order.item_quantity}}</div>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-label">Item Status</div>
+                        <div class="order-value">{{order.order_status}}</div>
+                    </div>
+                    <div class="total-amount">₹{{order.total_amount}}</div>
+                    <!-- <div class="card-actions">
+                        <button class="accept-btn">Order Accept</button>
+                        <button class="served-btn">Order Served</button>
+                    </div> -->
+                </div>
+            </div>
+             {% endfor %}
+            
+
+        </div>
+    </div>
+</body>
+</html>

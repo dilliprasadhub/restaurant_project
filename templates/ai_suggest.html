@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .logout-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ee5a52;
+        }
+
+        .dashboard-title {
+            font-size: 32px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        /* View Orders Section */
+        .view-orders-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-orders-content h2 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .view-orders-content p {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .view-btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .view-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Orders Grid */
+        .orders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid #e8e8e8;
+        }
+
+        .order-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .order-info {
+            margin-bottom: 15px;
+        }
+
+        .order-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .order-value {
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #27ae60;
+            margin: 15px 0;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .accept-btn, .served-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .accept-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .accept-btn:hover {
+            background: #45a049;
+        }
+
+        .served-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        .served-btn:hover {
+            background: #2980b9;
+        }
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .containers {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* .header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            text-align: center;
+        } */
+
+        .header h1 {
+            font-size: 32px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .chat-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .prompt-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .prompt-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .send-btn {
+            background: #3498db;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .send-btn:hover {
+            background: #2980b9;
+        }
+
+        .response-section {
+            min-height: 200px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .response-label {
+            font-size: 14px;
+            color: #7f8c8d;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .response-text {
+            font-size: 16px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 14px;
+            padding: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="dashboard-title">🛖 Curnchy Kitchen</h1>
+            <!-- <button class="logout-btn"><a style="text-decoration: none;color: whitesmoke;" href="/api/logout">Logout</a></button> -->
+        </div>
+
+        <!-- View Orders Section -->
+    
+
+        <!-- Orders List -->
+         <div class="containers">
+                <div class="header">
+                    <h1>🤖 AI Dish Assistant</h1>
+                    <button class="view-btn"><a style="text-decoration: none;color: whitesmoke;" href="/user/dashboard">Dashboard</a></button>
+                </div>
+
+                <div class="chat-container">
+                    <div class="input-section">
+                        <input type="text" class="prompt-input" id="promptInput" placeholder="Ask me about dishes... (e.g., suggest vegetarian dishes)">
+                        <button class="send-btn" onclick="sendPrompt()">Send</button>
+                    </div>
+
+                    <div class="response-section">
+                        <div class="response-label">AI Response:</div>
+                        <div class="response-text" id="responseText">
+                            <div class="empty-state">Enter your prompt and click Send to get AI suggestions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                async function sendPrompt() {
+                    const input = document.getElementById('promptInput');
+                    const responseText = document.getElementById('responseText');
+                    const userPrompt = input.value.trim();
+
+                    if (userPrompt === "") {
+                        responseText.innerHTML = "<div class='empty-state'>Please enter a prompt first</div>";
+                        return;
+                    }
+
+                    responseText.innerHTML = "AI is thinking...";
+
+                    try {
+                        const res = await fetch('/ai/suggest', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ prompt: userPrompt })
+                        });
+
+                        const data = await res.json();
+                        responseText.innerHTML = data.response;
+
+                    } catch (error) {
+                        responseText.innerHTML = "Error contacting AI.";
+                    }
+                }
+
+                document.getElementById('promptInput').addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        sendPrompt();
+                    }
+                });
+                </script>
+
+    
+</body>
+</html>
