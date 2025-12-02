@@ -1,7 +1,13 @@
 from google import genai
 from ..repositories.restaurant_repository import RestaurantRepository
+import os 
+from dotenv import load_dotenv
 
-client = genai.Client(api_key="AIzaSyCSmHXM-HNALSKd-cJtvVE8dcw7OQiTwbM")
+load_dotenv()
+
+
+
+client = genai.Client(api_key=os.getenv('api_key'))
 
 res_service = RestaurantRepository()
 
