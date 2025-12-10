@@ -32,6 +32,9 @@ class RestaurantService():
     def get_owner_orders(self):
         return self._repository.get_all_orders_for_owner()
     
+    def get_user_list(self):
+        return self._repository.get_all_dishes()
+    
     def update_order_status(self,order_id,new_status):
         return self._repository.update_order_status(order_id,new_status)
     

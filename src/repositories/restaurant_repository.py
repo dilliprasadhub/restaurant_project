@@ -45,6 +45,9 @@ class RestaurantRepository():
 
     def get_item_by_id(self):
         return db.table("items") .select("*").execute().data
+    
+    def get_item_by_user(self):
+        return ( db.table("items") .select("*").eq("status", "available").execute() .data)
    
 
     def add_order(self, order_data):

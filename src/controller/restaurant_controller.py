@@ -135,7 +135,8 @@ def get_user_dashboard(request:Request):
     user=get_loggedin_user(request)
     if user : 
         res_service=RestaurantService()
-        res = res_service.get_item()    
+        # res = res_service.get_item()   
+        res = res_service.get_user_list() 
         return templates.TemplateResponse('user_dashboard.html',{'request':request,"dishes":res})
     return RedirectResponse('/login')
 
