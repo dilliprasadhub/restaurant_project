@@ -186,9 +186,9 @@ def add_order(request:Request,item_id=Form(...),item_name=Form(...),item_quantit
     print(item_quantity)
     if user:
         user_id=user.user.id
-        item =  res_service.get_item()
-        if item:
-            item_price=int(item[0]['item_price'])
+        item =  res_service.get_edit_dish(item_id)
+        if item.data:
+            item_price=int(item.data[0]['item_price'])
             qty = int(item_quantity)
             total_amount = item_price*qty
 
